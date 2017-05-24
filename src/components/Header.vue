@@ -2,7 +2,7 @@
 	<header id="head">
 		<div class="left">
 			<i class="menu"></i>
-			<router-link to="/">首页</router-link>
+			<router-link to="/" tag="span">首页</router-link>
 		</div>
 		<div class="right">
 			<i class="el-icon-information"></i>

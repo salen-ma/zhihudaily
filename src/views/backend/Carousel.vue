@@ -1,8 +1,10 @@
 <template>
   <div class="carousel">
     <el-carousel :interval="2000" arrow="never" height="500px">
-      <el-carousel-item v-for="item in 5" :key="item">
-        <h3>{{ item }}</h3>
+      <el-carousel-item v-for="item,index in topStories" :key="index">
+        <h3>
+          <img :src="item.image" alt="" width="100%" height="100%">
+        </h3>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -10,7 +12,7 @@
 
 <script>
   export default{
-
+    props:['topStories']
   }
 </script>
 

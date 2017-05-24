@@ -1,15 +1,20 @@
 <template>
 	<!--  帖子列表  -->
 	<div id="list">
-		
 	    <div class="list-item"  v-for="item in 2">
 	        <div class="list-title">今日热闻</div>
-	        <router-link to="/detail" class="media-item"  v-for="item in 3" tag="div">
+	        <router-link to="/detail" 
+		        class="media-item"  
+		        v-for="item,index in stories" 
+		        tag="div"
+		        :key="index"
+		        @click.native="showDetail(item.id)"
+	        >
 		        <div class="item-body">
-		            机场是怎么设计出来的
+		           {{item.title}}
 		        </div>
 		        <div class="item-pic">
-		            <!-- <img :src="item.images[0]" alt="" height="80px" width="100px"/> -->
+		            <img src="../../assets/images/01.jpg" alt="" height="100%" width="100%"/>
 		        </div>
 	        </router-link>	
 	    </div>
@@ -18,9 +23,10 @@
 
 <script>
 	export default{
-		data(){
-			return{
-
+		props:['stories'],
+		methods:{
+			showDetail(id){
+				console.log(id)
 			}
 		}
 	}
@@ -30,7 +36,6 @@
 	@rem:40rem;
 
 	#list{
-		height:2000/@rem;
 		padding:42/@rem 30/@rem 0 30/@rem;
 		background-color:#f3f3f3;
 		
@@ -59,7 +64,6 @@
 			.item-pic{
 				width:248/@rem;
 				height:216/@rem;
-				border:1px solid #000;
 			}
 		}
 	}
