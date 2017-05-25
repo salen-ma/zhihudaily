@@ -1,44 +1,27 @@
 <template>
-  <div class="carousel">
-    <el-carousel :interval="2000" arrow="never" height="500px">
-      <el-carousel-item v-for="item,index in topStories" :key="index">
-        <h3>
+  <swipe :auto="4000" class="swipe-wrap">
+      <swipe-item v-for="(item, index) in topStories" :key="index">
           <img :src="item.image" alt="" width="100%" height="100%">
-        </h3>
-      </el-carousel-item>
-    </el-carousel>
-  </div>
+      </swipe-item>
+  </swipe>  
 </template>
 
 <script>
+  import {Swipe, SwipeItem} from 'mint-ui'
+
   export default{
-    props:['topStories']
+    props:['topStories'],
+    components: {
+        Swipe,
+        SwipeItem,
+    }
   }
 </script>
 
 <style  lang="less" scoped>
   @rem:40rem;
-
-  .carousel{
+  .swipe-wrap{
     padding-top: 168/@rem;
-  }
-  .el-carousel__item h3 {
-    color: #475669;
-    font-size: 18px;
-    opacity: 0.75;
-    line-height: 300px;
-    margin: 0;
-  }
-  
-  .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
-  }
-  
-  .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
-  }
-
-  .el-carousel__indicators{
-    background-color:red;
+    height:600/@rem;
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div id="wrapper">
-		<div id="detail">
+		<!-- <div id="detail">
 			<div class="banner">
 				<img src="../../assets/images/02.jpg" height="100%" width="100%" alt="">
 			</div>
@@ -16,7 +16,19 @@
 					{{data.body}}
 				</div>
 			</div>
-		</div>
+		</div> -->
+		<div id="detail">
+		    <div class="detail-header" v-if="data.image">
+		      <div class="img-wrap">
+		        <h1 class="detail-title">{{data.title}}</h1>
+		        <span class="img-source">{{data.image_source}}</span>
+		        <img :src="data.image" height="100%" width="100%" alt="">
+		        <div class="img-mask"></div>
+		      </div>
+		    </div>
+		    <div class="article" v-html="data.body">
+		    </div>
+		 </div>		
 	</div>
 </template>
 
@@ -66,39 +78,37 @@
 	#detail{
 		padding-top: 168/@rem;
 
-		.banner{
+		.detail-header{
 			height: 610/@rem;
+
+			.img-wrap{
+				position: relative;
+    			overflow: hidden;	
+    			width:100%;
+    			height:100%;
+				 			
+				.detail-title {
+				    margin: 20/@rem 0;
+				    padding:0 40/@rem;
+				    bottom: 10/@rem;
+				    z-index: 1;
+				    position: absolute;
+				    color: white;
+				    font-size: 30px;
+				}
+				.img-source {
+				    position: absolute;
+				    bottom: 10/@rem;
+				    z-index: 1;
+				    font-size: 12px;
+				    color: rgba(255,255,255,.6);
+				    right: 40/@rem;
+				}		  
+			}
 		}
 
 		.article{
 			padding: 60/@rem;
-
-			.user{
-				height:66/@rem;
-				margin-bottom: 60/@rem;
-				font-size: 46/@rem;
-				line-height:66/@rem;
-				
-				.user-pic,.user-name,.user-info{
-					display: inline-block;
-					height:100%;
-					vertical-align: top;
-				}
-				.user-pic{
-					width:62/@rem;
-					border-radius: 5/@rem;
-					margin-right: 26/@rem;
-					overflow: hidden;
-				}
-				.user-info{
-					color:#dadada;
-				}
-			}
-
-			.text{
-				font-size:48/@rem;
-				line-height:80/@rem;
-			}
 		}
 	}
 </style>

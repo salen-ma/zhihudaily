@@ -14,7 +14,7 @@
 		           {{item.title}}
 		        </div>
 		        <div class="item-pic">
-		            <img src="../../assets/images/01.jpg" alt="" height="100%" width="100%"/>
+		            <img :src="item.images" alt="" height="100%" width="100%"/>
 		        </div>
 	        </router-link>	
 	    </div>
