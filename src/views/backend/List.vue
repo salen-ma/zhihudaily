@@ -1,14 +1,14 @@
 <template>
 	<!--  帖子列表  -->
 	<div id="list">
-	    <div class="list-item"  v-for="item in 2">
-	        <div class="list-title">今日热闻</div>
-	        <router-link to="/detail" 
+	    <div class="list-item"  v-for="list,index in data" :key="index">
+	        <div class="list-title">{{ index === 0 ? '今日热闻' : dateForm(list.date)}}</div>
+	        <router-link
 		        class="media-item"  
-		        v-for="item,index in stories" 
+		        v-for="item,index in list.stories" 
+		        :to="`/detail/${item.id}`"
 		        tag="div"
 		        :key="index"
-		        @click.native="showDetail(item.id)"
 	        >
 		        <div class="item-body">
 		           {{item.title}}
@@ -22,12 +22,12 @@
 </template>
 
 <script>
+	import dateForm from '../../assets/js/DateForm.js'
+
 	export default{
-		props:['stories'],
+		props:['data'],
 		methods:{
-			showDetail(id){
-				console.log(id)
-			}
+			dateForm
 		}
 	}
 </script>
@@ -60,6 +60,8 @@
 				flex:1;
 				font-size: 52/@rem;
 				line-height:64/@rem;
+				box-sizing:border-box;
+				padding-right: 10/@rem;
 			}
 			.item-pic{
 				width:248/@rem;

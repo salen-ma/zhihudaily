@@ -14,12 +14,12 @@ export default new Router({
       component: Layout,
       children:[
       	{
- 			path: '/',
- 			name:'Main',
+     			path: '/',
+     			name:'Main',
       		component: Main      		
       	},
       	{
-      		path: '/detail',
+      		path: '/detail/:id?',
       		name:'Detail',
       		component:Detail
       	}

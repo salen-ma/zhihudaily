@@ -1,28 +1,14 @@
 <template>
 	<div id="wrapper">
-		<!-- <div id="detail">
-			<div class="banner">
-				<img src="../../assets/images/02.jpg" height="100%" width="100%" alt="">
-			</div>
-			<div class="article">
-				<div class="user">
-					<span class="user-pic">
-						<img src="../../assets/images/03.png" height="100%" width="100%" alt="">
-					</span>
-					<strong class="user-name">salen,</strong>
-					<span class="user-info">dddsssdfsdff</span>
-				</div>
-				<div class="text" v-html="data.body">
-					{{data.body}}
-				</div>
-			</div>
-		</div> -->
 		<div id="detail">
 		    <div class="detail-header" v-if="data.image">
 		      <div class="img-wrap">
 		        <h1 class="detail-title">{{data.title}}</h1>
 		        <span class="img-source">{{data.image_source}}</span>
-		        <img :src="data.image" height="100%" width="100%" alt="">
+		        <div 
+			        :style="{'background-image':`url(${data.image})`}" 
+			        class="top-img">
+		        </div>
 		        <div class="img-mask"></div>
 		      </div>
 		    </div>
@@ -38,21 +24,19 @@
 	export default{
 		data(){
 			return {
-				data:{}
+				data:{},
+				dataId:''
 			}
 		},
 		mounted(){
-			this.$http.get('/news/9436171').then((d)=>{
- 				console.log(d.data)
+			this.$http.get(`/news/${window.location.hash.split('/')[2]}`).then((d)=>{
 		        this.data = d.data
-
 				this.$nextTick(function(){
 		           scroll.refresh();
 		        })		        
 	        })	
 
 			let scroll = null
-
 			this.$nextTick( ()=>{
 				let wrapper = document.getElementById("wrapper")	
 				scroll = new Bscroll(wrapper,{
@@ -62,7 +46,7 @@
 			        momentum:true
 			    })						
 			})				
-		}		
+		}			
 	}
 </script>
 
@@ -90,25 +74,47 @@
 				.detail-title {
 				    margin: 20/@rem 0;
 				    padding:0 40/@rem;
-				    bottom: 10/@rem;
+				    bottom: 80/@rem;
 				    z-index: 1;
 				    position: absolute;
 				    color: white;
-				    font-size: 30px;
+				    font-size: 62/@rem;
+				    line-height:88/@rem;
 				}
 				.img-source {
 				    position: absolute;
 				    bottom: 10/@rem;
 				    z-index: 1;
-				    font-size: 12px;
-				    color: rgba(255,255,255,.6);
+				    font-size: 36/@rem;
+				    color: rgba(255,255,255,.8);
 				    right: 40/@rem;
-				}		  
+				}		
+				.top-img{
+			 		width:100%; 
+		      		height:100%;
+		      		background-repeat: no-repeat;
+		      		background-position: center;       
+		      		background-size: cover;					
+				}  
 			}
 		}
 
 		.article{
 			padding: 60/@rem;
+			font-size: 50/@rem;
+			line-height: 74/@rem;
+			
+			.meta{
+				
+			}
+
+			.content{
+				p{
+					.content-image{
+						width: 100%;
+					}
+				}
+			}
 		}
 	}
 </style>
