@@ -17,11 +17,16 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios,axios)
 
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  loading: '/static/loading.gif'
+})
+
 Vue.config.productionTip = false
 
 // MintUI.Indicator.open()
 
-require('./assets/css/app.css')
+import './assets/css/app.css'
 
 /* eslint-disable no-new */
 new Vue({

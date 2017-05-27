@@ -25,32 +25,47 @@
 		data(){
 			return {
 				data:{},
-				dataId:''
+				dataId:'',
+				scroll:null
+			}
+		},
+		watch: {
+			data(){
+				this.$nextTick( () =>{
+		           this.scroll.refresh()
+		        })
+		        setTimeout( () =>{
+		        	this.scroll.refresh()
+		        },500)
+				setTimeout( () =>{
+		        	this.scroll.refresh()
+		        },1000)	
+				setTimeout( () =>{
+		        	this.scroll.refresh()
+		        },2000)		        	        				
 			}
 		},
 		mounted(){
 			this.$http.get(`/news/${window.location.hash.split('/')[2]}`).then((d)=>{
-		        this.data = d.data
-				this.$nextTick(function(){
-		           scroll.refresh();
-		        })		        
+		        this.data = d.data    	            
+		        console.log(d.data)
 	        })	
 
-			let scroll = null
 			this.$nextTick( ()=>{
 				let wrapper = document.getElementById("wrapper")	
-				scroll = new Bscroll(wrapper,{
+				this.scroll = new Bscroll(wrapper,{
 			        startX: 0,
 			        startY: 0,
 			        bounce:false,
-			        momentum:true
+			        momentum:true,
+			        click: true
 			    })						
 			})				
 		}			
 	}
 </script>
 
-<style  lang="less" scoped>
+<style  lang="less">
 	@rem:40rem;
 	#wrapper{
 		position: fixed;
@@ -63,7 +78,7 @@
 		padding-top: 168/@rem;
 
 		.detail-header{
-			height: 610/@rem;
+			height: 610/@rem; 
 
 			.img-wrap{
 				position: relative;
@@ -74,7 +89,7 @@
 				.detail-title {
 				    margin: 20/@rem 0;
 				    padding:0 40/@rem;
-				    bottom: 80/@rem;
+				    bottom: 50/@rem;
 				    z-index: 1;
 				    position: absolute;
 				    color: white;
@@ -96,6 +111,14 @@
 		      		background-position: center;       
 		      		background-size: cover;					
 				}  
+				.img-mask{
+					position:absolute;
+					left:0;
+					top:0;
+					width:100%;
+    				height:100%;					
+					background:-webkit-linear-gradient(top,rgba(0,0,0,0) 0%,rgba(0,0,0,.2) 60%,rgba(0,0,0,.6) 100%); 
+				}
 			}
 		}
 
@@ -104,16 +127,50 @@
 			font-size: 50/@rem;
 			line-height: 74/@rem;
 			
-			.meta{
-				
+			.question{
+				.question-title{
+					font-size:54/@rem;
+					color:#000;
+					font-weight: bold;
+					margin-bottom: 30/@rem;
+				}
 			}
+			.answer{
+				margin-bottom: 50/@rem;
+				.meta{
+					margin-bottom: 30/@rem;
 
-			.content{
-				p{
-					.content-image{
-						width: 100%;
+					.avatar{
+						width:62/@rem;
+						height:62/@rem;
+						margin-right: 30/@rem;
+					}
+					.author{
+						font-size:50/@rem;
+						font-weight: bold;
+					}
+					.bio{
+						color:#666;
 					}
 				}
+				.content{
+					p{	
+						margin-bottom: 30/@rem;
+						.content-image{
+							width: 100%;
+						}
+					}
+				}
+			}
+
+			.view-more{
+				width:100%;
+				height:90/@rem;
+				margin-bottom:60/@rem;
+				background:#eee;
+				line-height:90/@rem;
+				text-align: center;
+				color:#aaa;
 			}
 		}
 	}

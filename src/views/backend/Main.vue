@@ -38,24 +38,25 @@
 		        this.date = d.data.date
 
 				this.$nextTick(function(){
-		           scroll.refresh();
+		           scroll.refresh()
 		        })		        
 	        })		
 
 			this.$nextTick( ()=>{
 				let main = document.getElementById("main")	
 				let content = document.getElementById("content")
+
 				scroll = new Bscroll(main,{
 			        startX: 0,
 			        startY: 0,
 			        probeType: 3,
 			        click: true,
 			        momentum: true,
-			        bounce: false
+			        bounce: false,
+			        deceleration: 0.003
 			    })						
 				
-
-				let status = true;
+				let status = true
 				scroll.on("scroll",(pos) => {
 					// 下拉刷新
 					if(pos.y === 0 && status){

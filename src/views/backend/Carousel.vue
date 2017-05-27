@@ -6,7 +6,10 @@
           :to="`/detail/${item.id}`"
           tag="div"
           :style="{'background-image':`url(${item.image})`}"
-        ></router-link>        
+        >
+           <div class="title">{{item.title}}</div>
+        </router-link>
+        <div class="img-mask"></div>        
       </swipe-item>
   </swipe>  
 </template>
@@ -30,11 +33,32 @@
     height:610/@rem;
 
     .top-img{
+      position:relative;
       width:100%; 
       height:100%;
       background-repeat: no-repeat;
       background-position: center;       
       background-size: cover;
+
+      .title{
+        margin: 20/@rem 0;
+        padding:0 40/@rem;
+        bottom: 40/@rem;
+        z-index: 1;
+        position: absolute;
+        color: white;
+        font-size: 62/@rem;
+        line-height:88/@rem;        
+      }
+    }
+
+    .img-mask{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+        height:100%;          
+      background:-webkit-linear-gradient(top,rgba(0,0,0,0) 0%,rgba(0,0,0,.2) 60%,rgba(0,0,0,.6) 100%);      
     }
 
     .mint-swipe-indicators{
