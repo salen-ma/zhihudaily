@@ -4,23 +4,24 @@ import Vue from 'vue'
 import App from './App'
 
 import router from './router'
+import store from './vuex'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 Vue.use(ElementUI)
 
-import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
-Vue.use(MintUI)
+import { Lazyload } from 'mint-ui'
+Vue.use(Lazyload)
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios,axios)
 
-import VueLazyload from 'vue-lazyload'
+/*import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {
   loading: '/static/loading.gif'
-})
+})*/
 
 Vue.config.productionTip = false
 
@@ -32,6 +33,7 @@ import './assets/css/app.css'
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

@@ -12,7 +12,7 @@
 		        <div class="img-mask"></div>
 		      </div>
 		    </div>
-		    <div class="article" v-html="data.body">
+		    <div class="article" :class="{'night-style':nightStyle}" v-html="data.body">
 		    </div>
 		 </div>		
 	</div>
@@ -61,6 +61,11 @@
 			        click: true
 			    })						
 			})				
+		},
+		computed:{
+			nightStyle(){
+				return this.$store.state.nightStyle
+			}
 		}			
 	}
 </script>
@@ -121,7 +126,14 @@
 				}
 			}
 		}
-
+		
+		.article.night-style{
+			color:#f2f2f2;
+			background-color:#444;
+			.question-title{
+				color:#fff !important;
+			}
+		}
 		.article{
 			padding: 60/@rem;
 			font-size: 50/@rem;
@@ -158,6 +170,9 @@
 						margin-bottom: 30/@rem;
 						.content-image{
 							width: 100%;
+						}
+						a{
+							color:#1f5496;
 						}
 					}
 				}

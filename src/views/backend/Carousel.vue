@@ -7,9 +7,9 @@
           tag="div"
           :style="{'background-image':`url(${item.image})`}"
         >
-           <div class="title">{{item.title}}</div>
-        </router-link>
-        <div class="img-mask"></div>        
+          <div class="title">{{item.title}}</div>
+          <div class="img-mask"></div> 
+        </router-link>   
       </swipe-item>
   </swipe>  
 </template>

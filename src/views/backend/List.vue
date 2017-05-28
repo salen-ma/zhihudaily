@@ -1,6 +1,6 @@
 <template>
 	<!--  帖子列表  -->
-	<div id="list">
+	<div id="list" :class="{'night-style':nightStyle}">
 	    <div class="list-item"  v-for="list,index in data" :key="index">
 	        <div class="list-title">{{ index === 0 ? '今日热闻' : dateForm(list.date)}}</div>
 	        <router-link
@@ -28,13 +28,26 @@
 		props:['data'],
 		methods:{
 			dateForm
+		},
+		computed:{
+			nightStyle(){
+				return this.$store.state.nightStyle
+			}
 		}
 	}
 </script>
 
 <style lang="less" scoped>
 	@rem:40rem;
+	
+	#list.night-style{
+		color:#f3f3f3;	
+		background-color:#343434 !important;
 
+		.media-item{
+			background-color:#404040 !important;
+		}
+	}	
 	#list{
 		padding:42/@rem 30/@rem 0 30/@rem;
 		background-color:#f3f3f3;
@@ -46,7 +59,7 @@
 			margin-bottom: 60/@rem;
 			color:#6b6b6b;
 		}
-
+		
 		.media-item{
 			display: flex;
 			height: 300/@rem;
