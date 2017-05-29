@@ -14,7 +14,11 @@
 		    </div>
 		    <div class="article" :class="{'night-style':nightStyle}" v-html="data.body">
 		    </div>
-		 </div>		
+		    <div class="from" v-if="data.section">
+		    	<img :src="data.section.thumbnail" alt="">
+		    	<div class="from-body">本文来自: {{data.section.name}}.合集 <span></span></div>
+		    </div>
+		</div>		
 	</div>
 </template>
 
@@ -46,9 +50,9 @@
 			}
 		},
 		mounted(){
-			this.$http.get(`/news/${window.location.hash.split('/')[2]}`).then((d)=>{
-		        this.data = d.data    	            
-		        console.log(d.data)
+			this.$http.get(`/api/4/news/${window.location.hash.split('/')[2]}`).then((d)=>{
+		        this.data = d.data 
+		        console.log(d.data)   	            
 	        })	
 
 			this.$nextTick( ()=>{
@@ -58,8 +62,15 @@
 			        startY: 0,
 			        bounce:false,
 			        momentum:true,
+			         probeType: 3,
 			        click: true
-			    })						
+			    })		
+
+				let head = document.getElementById('head')
+				let h = document.getElementById('head').offsetHeight
+				this.scroll.on("scroll",(pos) => {
+					head.style.opacity = `${(pos.y + h) / h}`
+				})			    				
 			})				
 		},
 		computed:{
@@ -181,11 +192,40 @@
 			.view-more{
 				width:100%;
 				height:90/@rem;
-				margin-bottom:60/@rem;
+				margin-bottom:10/@rem;
 				background:#eee;
 				line-height:90/@rem;
 				text-align: center;
 				color:#aaa;
+			}
+		}
+		.from{
+			display: flex;
+			height:150/@rem;
+			padding:0 60/@rem;
+			padding-bottom:74/@rem;
+
+			img{
+				width:150/@rem;
+				height:150/@rem;
+			}
+			.from-body{
+				flex:1;
+				display:flex;
+				justify-content: space-between;
+				align-items: center;
+				padding:0 30/@rem;
+				background:#eee;
+				font-size:40/@rem;
+
+				span{
+					display:inline-block;
+					width:28/@rem;
+					height:28/@rem;
+					border-top: 2px solid #000;
+					border-right: 2px solid #000;
+					transform: rotate(45deg);
+				}
 			}
 		}
 	}

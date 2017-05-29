@@ -31,8 +31,11 @@
 		},
 		mounted(){
 			let scroll = null
+			this.$http.get('/api/4/section/35').then((d)=>{
+				console.log(d.data)
+			})
 
- 			this.$http.get('/news/latest').then((d)=>{
+ 			this.$http.get('/api/4/news/latest').then((d)=>{
  				this.topStories = d.data.top_stories
 		        this.data.push(d.data)
 		        this.date = d.data.date
@@ -62,7 +65,7 @@
 					if(pos.y === 0 && status){
 						status = false
 						this.isLoading = true
-						this.$http.get('/news/latest').then((d)=>{
+						this.$http.get('/api/4/news/latest').then((d)=>{
 			 				this.topStories = d.data.top_stories
 					        this.data = [d.data]
 					        this.date = d.data.date
@@ -78,7 +81,7 @@
 			        if(pos.y < 0){			          
 			            let max = content.offsetHeight - main.offsetHeight
 			            if( max - (-pos.y) <= 50 && status ){
-		                    this.$http.get(`/news/before/${this.date}`).then((d)=>{
+		                    this.$http.get(`/api/4/news/before/${this.date}`).then((d)=>{
 		                    	this.date = d.data.date
 		                        this.data.push(d.data)
 		                      
