@@ -14,10 +14,15 @@
 		    </div>
 		    <div class="article" :class="{'night-style':nightStyle}" v-html="data.body">
 		    </div>
-		    <div class="from" v-if="data.section">
+		    <router-link 
+			    class="from" 
+			    v-if="data.section" 
+			    :to="`/section/${data.section.id}`" 
+			    tag="div"
+		    >
 		    	<img :src="data.section.thumbnail" alt="">
 		    	<div class="from-body">本文来自: {{data.section.name}}.合集 <span></span></div>
-		    </div>
+		    </router-link>
 		</div>		
 	</div>
 </template>

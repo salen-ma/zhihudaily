@@ -1,50 +1,55 @@
 <template>
 	<!--  帖子列表  -->
-	<div id="list" :class="{'night-style':nightStyle}">
-        <router-link
-	        class="media-item"  
-	        v-for="item,index in list.stories" 
-	        :to="`/detail/${item.id}`"
-	        tag="div"
-	        :key="index"
-        >
-	        <div class="item-body">
-	           {{item.title}}
-	        </div>
-	        <div class="item-pic">
-	            <img :src="item.images" alt="" height="100%" width="100%"/>
-	        </div>
-        </router-link>	
-    </div>
+	<div id="main">
+		<div id="content">	
+			<div id="list" :class="{'night-style':nightStyle}">
+		        <router-link
+			        class="media-item"  
+			        v-for="item,index in list.stories" 
+			        :to="`/detail/${item.id}`"
+			        tag="div"
+			        :key="index"
+		        >
+			        <div class="item-body">
+			           {{item.title}}
+			        </div>
+			        <div class="item-pic">
+			            <img :src="item.images" alt="" height="100%" width="100%"/>
+			        </div>
+		        </router-link>	
+		    </div>
+		</div>
+	</div>    
 </template>
 
 <script>
-	import dateForm from '../../assets/js/DateForm.js'
+	import Bscroll from 'better-scroll'
 
 	export default{
-		props:['data'],
+		data(){
+			return {
+				list:{},
+				scroll:null
+			}
+		},
 		mounted(){
-			this.$http.get(`/api/4/news/${window.location.hash.split('/')[2]}`).then((d)=>{
-		        this.data = d.data 
-		        console.log(d.data)   	            
+			this.$http.get(`/api/4/section/${window.location.hash.split('/')[2]}`).then((d)=>{
+		        this.list = d.data 
+				this.$nextTick(function(){
+		           this.scroll.refresh()
+		        })		         	            
 	        })	
 
 			this.$nextTick( ()=>{
-				let wrapper = document.getElementById("wrapper")	
-				this.scroll = new Bscroll(wrapper,{
+				let wrapper = document.getElementById("main")	
+				this.scroll = new Bscroll(main,{
 			        startX: 0,
 			        startY: 0,
 			        bounce:false,
 			        momentum:true,
-			         probeType: 3,
+			        probeType: 3,
 			        click: true
-			    })		
-
-				let head = document.getElementById('head')
-				let h = document.getElementById('head').offsetHeight
-				this.scroll.on("scroll",(pos) => {
-					head.style.opacity = `${(pos.y + h) / h}`
-				})			    				
+			    })					    				
 			})				
 		},		
 		computed:{
@@ -58,6 +63,13 @@
 <style lang="less" scoped>
 	@rem:40rem;
 	
+	#main{
+		position: fixed;
+	    left: 0;
+	    top: 0;
+	    right: 0;
+	    bottom:0;		
+	}	
 	#list.night-style{
 		color:#f3f3f3;	
 		background-color:#343434 !important;
@@ -67,7 +79,7 @@
 		}
 	}	
 	#list{
-		padding:42/@rem 30/@rem 0 30/@rem;
+		padding:188/@rem 30/@rem 0 30/@rem;
 		background-color:#f3f3f3;
 			
 		.media-item{
