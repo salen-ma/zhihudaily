@@ -4,7 +4,7 @@
 			<custom-carousel :topStories="topStories" />
 			<custom-list :data="data" />
 			<custom-Loading v-show="isLoading"/>
-		</div>
+		</div>		
 	</div>
 </template>
 
@@ -12,6 +12,7 @@
 	import Carousel from '@/views/backend/Carousel'
 	import List from '@/views/backend/List'
 	import Loading from '@/components/Loading'
+	import { Popup } from 'mint-ui'
 
 	import Bscroll from 'better-scroll'
 

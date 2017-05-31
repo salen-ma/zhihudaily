@@ -4,7 +4,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    nightStyle:false
+    nightStyle:false,
+    popupVisible:false
   },
   mutations: {
     increment (state) {

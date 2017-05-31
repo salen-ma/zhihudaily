@@ -1,7 +1,7 @@
 <template>
 	<header id="head" :class="{'night-style':nightStyle}">
 		<div class="left">
-			<i class="menu"></i>
+			<i class="menu" @click="showSlideMenu"></i>
 			<router-link to="/" tag="span">首页</router-link>
 		</div>
 		<div class="right">
@@ -43,6 +43,9 @@
 	    methods:{
 	    	showAction(){
 	    		this.sheetVisible = true
+	    	},
+	    	showSlideMenu(){
+	    		this.$store.state.popupVisible = true
 	    	}
 	    },
 		computed:{
@@ -74,7 +77,7 @@
 		box-sizing: border-box;
 		padding: 0 56/@rem;
 		background-color:#00a2ea;
-		z-index: 9999;
+		z-index: 999;
 		
 		.left{
 			.flex-style1;			
