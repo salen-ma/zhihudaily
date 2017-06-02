@@ -41,7 +41,7 @@
 	        })	
 
 			this.$nextTick( ()=>{
-				let wrapper = document.getElementById("main")	
+				let main = document.getElementById("main")	
 				this.scroll = new Bscroll(main,{
 			        startX: 0,
 			        startY: 0,

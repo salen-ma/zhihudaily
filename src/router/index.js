@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Layout from '@/views/Layout'
 import Main from '@/views/backend/Main'
+import Theme from '@/views/backend/Theme'
 import Section from '@/views/backend/Section'
 import Detail from '@/views/backend/Detail'
 
@@ -28,6 +29,11 @@ export default new Router({
           path: '/section/:id?',
           name:'Section',
           component:Section
+        },
+        {
+          path: '/theme/:id?',
+          name:'Theme',
+          component:Theme
         }        
       ]
     }

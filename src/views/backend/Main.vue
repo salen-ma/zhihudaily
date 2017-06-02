@@ -32,10 +32,6 @@
 		},
 		mounted(){
 			let scroll = null
-			this.$http.get('/api/4/section/35').then((d)=>{
-				console.log(d.data)
-			})
-
  			this.$http.get('/api/4/news/latest').then((d)=>{
  				this.topStories = d.data.top_stories
 		        this.data.push(d.data)

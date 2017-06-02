@@ -30,6 +30,7 @@
 			dateForm
 		},
 		computed:{
+			// 是否开启夜间模式[Boolean]
 			nightStyle(){
 				return this.$store.state.nightStyle
 			}

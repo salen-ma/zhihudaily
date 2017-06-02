@@ -2,6 +2,7 @@
 	<section>
 		<custom-header />
 		<router-view></router-view>
+		<!-- 侧边栏主题列表 -->
 		<Popup 
 			v-model="popupVisible"
   			position="left"
@@ -16,18 +17,14 @@
 				<div class="list">
 					<div class="home">首页</div>
 					<ul>
-						<li>日常心理学</li>
-						<li>用户推荐日报</li>
-						<li>不许无聊</li>
-						<li>开始游戏</li>
-						<li>电影日报</li>
-						<li>设计日报</li>
-						<li>大公司日报</li>
-						<li>财经日报</li>
-						<li>互联网安全</li>
-						<li>音乐日报</li>
-						<li>动漫日报</li>
-						<li>体育日报</li>
+						<li 
+							v-for="item,index in list" 
+							:key="index"
+							@click="gotoTheme(item.id)"	
+					        tag="li"
+						>
+							{{item.name}}
+						</li>
 					</ul>
 				</div>
 			</slot>
@@ -44,9 +41,29 @@
 			'custom-header':Header,
 			Popup
 		},
+		data(){
+			return {
+				list:[]
+			}
+		},
+		mounted(){
+			// 获取主题列表项
+			this.$http.get('/api/4/themes').then((d)=>{
+				console.log(d.data)
+				this.list = d.data.others
+			})					
+		},
 		computed:{
+			// 是否显示主题列表[Boolean]
 			popupVisible(){
 				return this.$store.state.popupVisible
+			}
+		},
+		methods:{
+			gotoTheme(id){
+				this.$store.state.popupVisible = false
+				this.$router.push( {path:`/theme/${id}`} )
+				console.log(id)
 			}
 		}		
 	}
