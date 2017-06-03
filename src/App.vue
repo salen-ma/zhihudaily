@@ -10,5 +10,10 @@ export default {
 }
 </script>
 
-<style>
+<style  lang="less">
+	@rem:40rem;
+	#app .iconfont{
+		font-size:56/@rem;
+		color:#fff;
+	}
 </style>

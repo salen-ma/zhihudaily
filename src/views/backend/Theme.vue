@@ -1,14 +1,19 @@
 <template>
-	<!--  帖子列表  -->
 	<div id="main">
 		<div id="content">	
+			<custom-Loading v-show="isLoading"/>
 			<div class="top-img">
 				<div :style="{'background-image':`url(${data.image})`}"></div>
 			</div>
 			<div id="list" :class="{'night-style':nightStyle}">
 				<div class="editor">
 					主编 
-					<img class="avatar" :src="data.editors[0].avatar" alt="">
+					<img 
+						v-for="value in data.editors" 
+						class="avatar" 
+						:src="value.avatar" 
+						alt="editor"
+					>
 				</div>
 		        <router-link
 			        class="media-item"  
@@ -31,18 +36,41 @@
 
 <script>
 	import Bscroll from 'better-scroll'
+	import Loading from '@/components/Loading'
 
 	export default{
+		components:{
+			'custom-Loading':Loading
+		},
 		data(){
 			return {
 				data:{},
-				scroll:null
+				scroll:null,
+				isLoading:false,
+				id:0
 			}
 		},
+		beforeRouteUpdate (to,from,next){
+	        next()
+			this.$http.get(`/api/4/theme/${this.id}`).then((d)=>{
+		        this.data = d.data 	        	            
+	        })	          
+	    },
+	    watch:{
+	    	data(){
+	           this.$nextTick( () =>{
+		           this.scroll.refresh()
+		        })   		
+	    	}
+	    },	
 		mounted(){
-				
+			this.id = window.location.hash.split('/')[2]
+			this.$http.get(`/api/4/theme/${this.id}`).then((d)=>{
+		        this.data = d.data	         	            
+	        })	
+
 			this.$nextTick( ()=>{
-				let main = document.getElementById("main")
+				let main = document.getElementById("main")	
 				this.scroll = new Bscroll(main,{
 			        startX: 0,
 			        startY: 0,
@@ -50,36 +78,27 @@
 			        momentum:true,
 			        probeType: 3,
 			        click: true
-			    })					    				
-			})	
+			    })				    				
+			
+				let status = true
+				this.scroll.on("scroll",(pos) => {
+					// 下拉刷新
+					if(pos.y === 0 && status){
+						status = false
+						this.isLoading = true
+						this.$http.get(`/api/4/theme/${this.id}`).then((d)=>{
+			 				this.data = d.data
 
-			this.$http.get(`/api/4/theme/${window.location.hash.split('/')[2]}`).then((d)=>{
-		        this.data = d.data 
-				// this.$nextTick(function(){
-				// 	console.log(this.scroll)
-		  //          this.scroll.refresh()
-		  //       })		         	            
-	        })						
-		},	
-		updated(){
-			this.$nextTick( ()=>{
-				let main = document.getElementById("main")
-				this.scroll = new Bscroll(main,{
-			        startX: 0,
-			        startY: 0,
-			        bounce:false,
-			        momentum:true,
-			        probeType: 3,
-			        click: true
-			    })					    				
-			})	
-
-			// this.$nextTick(function(){
-			// 	console.log(2)
-			// 	console.log(this.scroll)
-	  //          this.scroll.refresh()
-	  //       })		         	            			
-		},	
+							this.$nextTick(function(){
+					           this.scroll.refresh()
+					           status = true
+					           this.isLoading = false
+					        })		        
+				        })						
+					}
+				})	
+			})						
+		},		
 		computed:{
 			nightStyle(){
 				return this.$store.state.nightStyle
@@ -96,7 +115,15 @@
 	    left: 0;
 	    top: 0;
 	    right: 0;
-	    bottom:0;		
+	    bottom:0;	
+
+		.spinner{
+	    	position:absolute;
+	    	left:50%;
+	    	top:120/@rem;
+	    	transform:translateX(-50%);
+	    	z-index: 10;
+	    }	    	
 	}	
 	.top-img{
 		height:676/@rem;

@@ -6,10 +6,6 @@ import App from './App'
 import router from './router'
 import store from './vuex'
 
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
-Vue.use(ElementUI)
-
 import 'mint-ui/lib/style.css'
 import { Lazyload } from 'mint-ui'
 Vue.use(Lazyload)

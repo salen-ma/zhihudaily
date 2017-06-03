@@ -56,8 +56,7 @@
 		},
 		mounted(){
 			this.$http.get(`/api/4/news/${window.location.hash.split('/')[2]}`).then((d)=>{
-		        this.data = d.data 
-		        console.log(d.data)   	            
+		        this.data = d.data  	            
 	        })	
 
 			this.$nextTick( ()=>{
@@ -65,9 +64,9 @@
 				this.scroll = new Bscroll(wrapper,{
 			        startX: 0,
 			        startY: 0,
-			        bounce:false,
-			        momentum:true,
-			         probeType: 3,
+			        bounce: false,
+			        momentum: true,
+			        probeType: 3,
 			        click: true
 			    })		
 

@@ -1,12 +1,12 @@
 <template>
 	<header id="head" :class="{'night-style':nightStyle}">
 		<div class="left">
-			<i class="menu" @click="showSlideMenu"></i>
+			<i class="iconfont icon-menu" @click="showSlideMenu"></i>
 			<router-link to="/" tag="span">首页</router-link>
 		</div>
 		<div class="right">
-			<i class="el-icon-information"></i>
-			<i class="el-icon-more" @click="showAction"></i>
+			<i class="iconfont icon-bell"></i>
+			<i class="iconfont icon-more" @click="showAction"></i>
 			<Actionsheet  
 				:actions="actions" 
 				v-model="sheetVisible" 
@@ -85,27 +85,6 @@
 			height:80px;
 			font-size:52/@rem;
 			color:#fff;
-
-			.menu{
-				position: relative;
-				display: inline-block;
-			}
-			.menu,.menu:before,.menu:after{
-				width:58/@rem;
-				height:6/@rem;
-				border-top:1px solid #388aaf;
-				border-bottom:1px solid #388aaf;
-				background-color:#fff;
-			}
-			.menu:before,.menu:after{
-				content: "";
-				position:absolute;
-				left:0;
-				top:-18/@rem;
-			}		
-			.menu:after{
-				top:18/@rem;
-			}
 		}
 
 		.right{
@@ -114,13 +93,9 @@
 			width:200px;
 			height:80px;		
 
-			.el-icon-more{
-				transform:rotate(90deg);
+			.icon-more{
+				font-size:80/@rem;
 			}	
-			.el-icon-more,.el-icon-information{
-				color:#fff;
-				font-size:52/@rem;				
-			}
 			
 			.mint-actionsheet{
 				position:absolute;
