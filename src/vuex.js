@@ -8,8 +8,8 @@ export default new Vuex.Store({
     popupVisible:false
   },
   mutations: {
-    increment (state) {
-      state.count++
+    changepopupVisible(state){
+    	state.popupVisible = !state.popupVisible
     }
   }
 })

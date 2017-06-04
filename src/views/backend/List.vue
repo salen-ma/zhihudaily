@@ -6,7 +6,7 @@
 	        <router-link
 		        class="media-item"  
 		        v-for="item,index in list.stories" 
-		        :to="`/detail/${item.id}`"
+		        :to="{name:'Detail',params:{id:item.id}}"
 		        tag="div"
 		        :key="index"
 	        >

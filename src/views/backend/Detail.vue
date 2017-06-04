@@ -17,7 +17,7 @@
 		    <router-link 
 			    class="from" 
 			    v-if="data.section" 
-			    :to="`/section/${data.section.id}`" 
+			    :to="{name:'Section',params:{id:data.section.id}}"
 			    tag="div"
 		    >
 		    	<img :src="data.section.thumbnail" alt="">
@@ -55,8 +55,8 @@
 			}
 		},
 		mounted(){
-			this.$http.get(`/api/4/news/${window.location.hash.split('/')[2]}`).then((d)=>{
-		        this.data = d.data  	            
+			this.$http.get(`/api/4/news/${this.$route.params.id}`).then((d)=>{
+		        this.data = d.data  	          
 	        })	
 
 			this.$nextTick( ()=>{
@@ -74,8 +74,16 @@
 				let h = document.getElementById('head').offsetHeight
 				this.scroll.on("scroll",(pos) => {
 					head.style.opacity = `${(pos.y + h) / h}`
+					if(head.style.opacity < 0 ){
+						head.style.opacity = 0
+					}
 				})			    				
 			})				
+		},
+		beforeRouteLeave(to,from,next){
+			let head = document.getElementById('head')
+			head.style.opacity = 1
+			next()
 		},
 		computed:{
 			nightStyle(){

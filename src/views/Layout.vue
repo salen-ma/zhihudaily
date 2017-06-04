@@ -7,6 +7,7 @@
 			v-model="popupVisible"
   			position="left"
   			popup-transition="popup-fade"
+  			:modal="false"
 		>
 			<slot>
 				<div class="content">
@@ -42,7 +43,8 @@
 					</div>
 				</div>
 			</slot>
-		</Popup>		
+		</Popup>
+		<div class="modal-mask" v-show="popupVisible" @click="hidePopup"></div>		
 	</section>
 </template>
 
@@ -76,14 +78,17 @@
 		},
 		methods:{
 			gotoTheme(id){
-				this.$store.state.popupVisible = false
+				this.$store.commit('changepopupVisible')
 				this.id = id
-				this.$router.push( {path:`/theme/${id}`} )
+				this.$router.push( { name:'Theme',params:{id:id} })
 			},
 			gotoHome(){
-				this.$store.state.popupVisible = false
+				this.$store.commit('changepopupVisible')
 				this.id = 0
-				this.$router.push( {path:`/`} )				
+				this.$router.push( {name:'Main'} )				
+			},
+			hidePopup(){
+				this.$store.commit('changepopupVisible')
 			}
 		}		
 	}
@@ -91,6 +96,16 @@
 
 <style  lang="less" scoped>
 	@rem:40rem;
+	section{
+		height:100%;
+	}
+	.modal-mask{
+		position:relative;
+		width:100%;
+		height:100%;
+		z-index: 2000;
+		background-color:rgba(0,0,0,.5);
+	}
 	.mint-popup{
 		width:85%;
 		height:100%;

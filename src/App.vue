@@ -12,8 +12,14 @@ export default {
 
 <style  lang="less">
 	@rem:40rem;
-	#app .iconfont{
-		font-size:56/@rem;
-		color:#fff;
+	html,body{
+		height:100%;
+	}
+	#app{
+		height: 100%;
+		.iconfont{
+			font-size:56/@rem;
+			color:#fff;
+		}
 	}
 </style>

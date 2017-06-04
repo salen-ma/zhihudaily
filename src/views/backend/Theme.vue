@@ -18,7 +18,7 @@
 		        <router-link
 			        class="media-item"  
 			        v-for="item,index in data.stories" 
-			        :to="`/detail/${item.id}`"
+			        :to="{name:'Detail',params:{id:item.id}}"
 			        tag="div"
 			        :key="index"
 		        >
@@ -64,7 +64,7 @@
 	    	}
 	    },	
 		mounted(){
-			this.id = window.location.hash.split('/')[2]
+			this.id = this.$route.params.id
 			this.$http.get(`/api/4/theme/${this.id}`).then((d)=>{
 		        this.data = d.data	         	            
 	        })	

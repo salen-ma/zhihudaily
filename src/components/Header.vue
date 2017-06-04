@@ -2,7 +2,7 @@
 	<header id="head" :class="{'night-style':nightStyle}">
 		<div class="left">
 			<i class="iconfont icon-menu" @click="showSlideMenu"></i>
-			<router-link to="/" tag="span">首页</router-link>
+			<router-link :to="{name:'Main'}" tag="span">首页</router-link>
 		</div>
 		<div class="right">
 			<i class="iconfont icon-bell"></i>
@@ -45,7 +45,7 @@
 	    		this.sheetVisible = true
 	    	},
 	    	showSlideMenu(){
-	    		this.$store.state.popupVisible = true
+	    		this.$store.commit('changepopupVisible')
 	    	}
 	    },
 		computed:{

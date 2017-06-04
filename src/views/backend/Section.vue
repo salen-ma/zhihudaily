@@ -33,7 +33,7 @@
 			}
 		},
 		mounted(){
-			this.$http.get(`/api/4/section/${window.location.hash.split('/')[2]}`).then((d)=>{
+			this.$http.get(`/api/4/section/${this.$route.params.id}`).then((d)=>{
 		        this.list = d.data 
 				this.$nextTick(function(){
 		           this.scroll.refresh()
