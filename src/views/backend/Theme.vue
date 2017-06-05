@@ -3,7 +3,9 @@
 		<div id="content">	
 			<custom-Loading v-show="isLoading"/>
 			<div class="top-img">
-				<div :style="{'background-image':`url(${data.image})`}"></div>
+				<p class="title">{{data.description}}</p>
+				<div class="img" :style="{'background-image':`url(${data.image})`}"></div>
+				<div class="img-mask"></div>
 			</div>
 			<div id="list" :class="{'night-style':nightStyle}">
 				<div class="editor">
@@ -66,7 +68,7 @@
 		mounted(){
 			this.id = this.$route.params.id
 			this.$http.get(`/api/4/theme/${this.id}`).then((d)=>{
-		        this.data = d.data	         	            
+		        this.data = d.data	       	            
 	        })	
 
 			this.$nextTick( ()=>{
@@ -126,9 +128,20 @@
 	    }	    	
 	}	
 	.top-img{
+		position:relative;
 		height:676/@rem;
 		padding-top:168/@rem;
-        div{
+		.title {
+		    margin: 20/@rem 0;
+		    padding:0 40/@rem;
+		    bottom: 50/@rem;
+		    z-index: 1;
+		    position: absolute;
+		    color: white;
+		    font-size: 56/@rem;
+		    line-height:88/@rem;
+		}		
+        .img{
 			position:relative;
 	        width:100%; 
 	        height:100%;
@@ -136,6 +149,14 @@
 	        background-position: center;       
 	        background-size: cover;		
         }
+		.img-mask{
+			position:absolute;
+			left:0;
+			top:0;
+			width:100%;
+			height:100%;					
+			background:-webkit-linear-gradient(top,rgba(0,0,0,0) 0%,rgba(0,0,0,.2) 60%,rgba(0,0,0,.6) 100%); 
+		}        
 	}
 	#list.night-style{
 		color:#f3f3f3;	

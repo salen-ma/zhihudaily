@@ -3,7 +3,7 @@
 		<div id="detail">
 		    <div class="detail-header" v-if="data.image">
 		      <div class="img-wrap">
-		        <h1 class="detail-title">{{data.title}}</h1>
+		        <p class="detail-title">{{data.title}}</p>
 		        <span class="img-source">{{data.image_source}}</span>
 		        <div 
 			        :style="{'background-image':`url(${data.image})`}" 
@@ -35,6 +35,7 @@
 			return {
 				data:{},
 				dataId:'',
+				extraInfo:{},
 				scroll:null
 			}
 		},
@@ -58,6 +59,11 @@
 			this.$http.get(`/api/4/news/${this.$route.params.id}`).then((d)=>{
 		        this.data = d.data  	          
 	        })	
+			this.$http.get(`/api/4/story-extra/${this.$route.params.id}`).then((d)=>{
+		        this.extraInfo = d.data 
+		        this.$store.commit('getComments',this.extraInfo.comments)	
+		        this.$store.commit('getPopularity',this.extraInfo.popularity)          
+	        })	        
 
 			this.$nextTick( ()=>{
 				let wrapper = document.getElementById("wrapper")	

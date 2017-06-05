@@ -49,25 +49,27 @@
 				scroll = new Bscroll(main,{
 			        startX: 0,
 			        startY: 0,
-			        probeType: 3,
+			        probeType: 3, // 事件完毕后触发
 			        click: true,
-			        momentum: true,
-			        bounce: false,
-			        deceleration: 0.003
+			        momentum: true, // 惯性拖动
+			        bounce: false, // 弹动效果
+			        deceleration: 0.003, // 滚动动量减速,越大越快
+			        HWCompositing: true // 硬件加速
 			    })						
 				
 				let status = true
+
 				scroll.on("scroll",(pos) => {
 					// 下拉刷新
-					if(pos.y === 0 && status){
+					if(pos.y >= 0 && status){
 						status = false
 						this.isLoading = true
-						this.$http.get('/api/4/news/latest').then((d)=>{
+						this.$http.get('/api/4/news/latest').then( (d) => {
 			 				this.topStories = d.data.top_stories
 					        this.data = [d.data]
 					        this.date = d.data.date
 
-							this.$nextTick(function(){
+							this.$nextTick( () => {
 					           scroll.refresh()
 					           status = true
 					           this.isLoading = false

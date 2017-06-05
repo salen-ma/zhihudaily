@@ -1,12 +1,34 @@
 <template>
 	<header id="head" :class="{'night-style':nightStyle}">
 		<div class="left">
-			<i class="iconfont icon-menu" @click="showSlideMenu"></i>
-			<router-link :to="{name:'Main'}" tag="span">首页</router-link>
+			<i 
+				class="iconfont icon-menu" 
+				v-if="name==='Main' || name==='Theme'"
+				@click="showSlideMenu" 
+			>
+			</i>
+			<i 
+				class="iconfont icon-arrow" 
+				v-if="name==='Detail' || name==='Section'"
+				@click="goBack" 
+			>
+			</i>			
+			<span v-if="name!=='Detail'">{{title}}</span>
 		</div>
-		<div class="right">
-			<i class="iconfont icon-bell"></i>
-			<i class="iconfont icon-more" @click="showAction"></i>
+		<div class="right" :class="{detail:name==='Detail'}">
+			<i class="iconfont icon-bell" v-if="name==='Main'"></i>
+			<i class="iconfont icon-more" v-if="name==='Main'" @click="showAction"></i>
+
+			<i class="iconfont icon-share" v-if="name==='Detail'"></i>
+			<i class="iconfont icon-star" v-if="name==='Detail'"></i>
+			<span class="comment" v-if="name==='Detail'">
+				<i class="iconfont icon-comment"></i>
+				<span>{{comments}}</span>
+			</span>
+			<span class="like" v-if="name==='Detail'">
+				<i class="iconfont icon-like"></i>
+				<span>{{popularity}}</span>
+			</span>
 			<Actionsheet  
 				:actions="actions" 
 				v-model="sheetVisible" 
@@ -20,6 +42,7 @@
 <script>
 	import { Actionsheet } from 'mint-ui'
 	export default{
+		props:["name"],
 		data(){
 			return {
 				sheetVisible:false,
@@ -28,7 +51,7 @@
 						name:'夜间模式',
 						method:()=>{
 							this.actions[0].name = !this.$store.state.nightStyle ? '日间模式' : '夜间模式'
-							this.$store.state.nightStyle = !this.$store.state.nightStyle
+							this.$store.commit('changeNightStyle')
 						}
 					},
 					{
@@ -45,12 +68,24 @@
 	    		this.sheetVisible = true
 	    	},
 	    	showSlideMenu(){
-	    		this.$store.commit('changepopupVisible')
+	    		this.$store.commit('changePopupVisible')
+	    	},
+	    	goBack(){
+	    		this.$router.go(-1)
 	    	}
 	    },
 		computed:{
 			nightStyle(){
 				return this.$store.state.nightStyle
+			},
+			title(){
+				return this.$store.state.title
+			},
+			comments(){
+				return this.$store.state.comments
+			},
+			popularity(){
+				return this.$store.state.popularity
 			}
 		}		
 	}
@@ -79,22 +114,29 @@
 		background-color:#00a2ea;
 		z-index: 999;
 		
-		.left{
-			.flex-style1;			
-			width:270px;
+		.left{		
 			height:80px;
 			font-size:52/@rem;
 			color:#fff;
+			.iconfont{
+				margin-right: 100/@rem;
+			}
 		}
-
+		
+		.detail{
+			width:600/@rem !important;
+		}
 		.right{
 			position:relative;
 			.flex-style1;			
-			width:200px;
-			height:80px;		
+			width:220/@rem;
+			height:80/@rem;		
 
 			.icon-more{
 				font-size:80/@rem;
+			}
+			.comment,.like{
+				color:#fff;
 			}	
 			
 			.mint-actionsheet{
