@@ -9,7 +9,7 @@
 			</i>
 			<i 
 				class="iconfont icon-arrow" 
-				v-if="name==='Detail' || name==='Section'"
+				v-if="name==='Detail' || name==='Section' || name==='Comment'"
 				@click="goBack" 
 			>
 			</i>			
@@ -21,7 +21,11 @@
 
 			<i class="iconfont icon-share" v-if="name==='Detail'"></i>
 			<i class="iconfont icon-star" v-if="name==='Detail'"></i>
-			<span class="comment" v-if="name==='Detail'">
+			<span
+				class="comment" 
+				v-if="name==='Detail'" 
+				@click="gotoComment"
+			>
 				<i class="iconfont icon-comment"></i>
 				<span>{{comments}}</span>
 			</span>
@@ -71,7 +75,12 @@
 	    		this.$store.commit('changePopupVisible')
 	    	},
 	    	goBack(){
+	    		this.$store.commit('changeTitle','首页')
 	    		this.$router.go(-1)
+	    	},
+	    	gotoComment(){
+	    		this.$store.commit('changeTitle',this.comments+'条点评')
+	    		this.$router.push( { name:'Comment'})
 	    	}
 	    },
 		computed:{
@@ -82,10 +91,10 @@
 				return this.$store.state.title
 			},
 			comments(){
-				return this.$store.state.comments
+				return this.$store.state.extraInfo.comments
 			},
 			popularity(){
-				return this.$store.state.popularity
+				return this.$store.state.extraInfo.popularity
 			}
 		}		
 	}

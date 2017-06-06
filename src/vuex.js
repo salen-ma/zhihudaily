@@ -8,7 +8,8 @@ export default new Vuex.Store({
     popupVisible:false,
     title:'首页',
     comments:0,
-    popularity:0
+    popularity:0,
+    extraInfo:{}
   },
   mutations: {
     changePopupVisible(state,ele){
@@ -23,11 +24,8 @@ export default new Vuex.Store({
     changeTitle(state,newTitle){
       state.title = newTitle
     },
-    getComments(state,num){
-      state.comments = num
-    },
-    getPopularity(state,num){
-      state.popularity = num
+    getExtraInfo(state,obj){
+      state.extraInfo = obj
     }
   }
 })

@@ -6,6 +6,7 @@ import Main from '@/views/backend/Main'
 import Theme from '@/views/backend/Theme'
 import Section from '@/views/backend/Section'
 import Detail from '@/views/backend/Detail'
+import Comment from '@/views/backend/Comment'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
           path: '/theme/:id?',
           name:'Theme',
           component:Theme
+        },
+        {
+          path:'/comment',
+          name:'Comment',
+          component:Comment
         }        
       ]
     }

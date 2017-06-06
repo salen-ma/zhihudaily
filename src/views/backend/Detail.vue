@@ -35,7 +35,6 @@
 			return {
 				data:{},
 				dataId:'',
-				extraInfo:{},
 				scroll:null
 			}
 		},
@@ -60,9 +59,7 @@
 		        this.data = d.data  	          
 	        })	
 			this.$http.get(`/api/4/story-extra/${this.$route.params.id}`).then((d)=>{
-		        this.extraInfo = d.data 
-		        this.$store.commit('getComments',this.extraInfo.comments)	
-		        this.$store.commit('getPopularity',this.extraInfo.popularity)          
+		        this.$store.commit('getExtraInfo',d.data)          
 	        })	        
 
 			this.$nextTick( ()=>{

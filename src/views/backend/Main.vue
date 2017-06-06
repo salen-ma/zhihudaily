@@ -58,7 +58,6 @@
 			    })						
 				
 				let status = true
-
 				scroll.on("scroll",(pos) => {
 					// 下拉刷新
 					if(pos.y >= 0 && status){
@@ -83,8 +82,7 @@
 		                    this.$http.get(`/api/4/news/before/${this.date}`).then((d)=>{
 		                    	this.date = d.data.date
 		                        this.data.push(d.data)
-		                      
-		                        // 新获取到的数据是否已经全部渲染在页面中了，渲染完成后，会执行$nextTick
+
 		                        this.$nextTick(function(){
 		                            // 重新计算滚动
 		                            scroll.refresh()
