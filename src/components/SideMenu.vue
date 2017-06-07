@@ -113,11 +113,10 @@
 <style lang="less">
 	@rem:40rem;
 	.slide-menu-wrap{
-		width:100%;
-		height:100%;	
-	
 		.modal-mask{
-			position:relative;
+			position:fixed;
+			left:0;
+			top:0;			
 			width:100%;
 			height:100%;
 			z-index: 1900;

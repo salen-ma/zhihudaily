@@ -9,7 +9,10 @@ export default new Vuex.Store({
     title:'首页',
     comments:0,
     popularity:0,
-    extraInfo:{}
+    detailId:0,
+    extraInfo:{},
+    long_comments:[],
+    short_comments:[]
   },
   mutations: {
     changePopupVisible(state,ele){
@@ -26,6 +29,15 @@ export default new Vuex.Store({
     },
     getExtraInfo(state,obj){
       state.extraInfo = obj
-    }
+    },
+    getLongComments(state,arr){
+      state.long_comments = arr
+    },
+    getShortComments(state,arr){
+      state.short_comments = arr
+    },
+    getDetailId(state,id){
+      state.detailId = id
+    }    
   }
 })

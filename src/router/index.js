@@ -37,7 +37,7 @@ export default new Router({
           component:Theme
         },
         {
-          path:'/comment',
+          path:'/comment/:id?',
           name:'Comment',
           component:Comment
         }        

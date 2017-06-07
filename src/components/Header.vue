@@ -80,7 +80,7 @@
 	    	},
 	    	gotoComment(){
 	    		this.$store.commit('changeTitle',this.comments+'条点评')
-	    		this.$router.push( { name:'Comment'})
+	    		this.$router.push( { name:'Comment',params:{id:this.id} } )
 	    	}
 	    },
 		computed:{
@@ -95,6 +95,9 @@
 			},
 			popularity(){
 				return this.$store.state.extraInfo.popularity
+			},
+			id(){
+				return this.$store.state.detailId
 			}
 		}		
 	}

@@ -60,7 +60,9 @@
 	        })	
 			this.$http.get(`/api/4/story-extra/${this.$route.params.id}`).then((d)=>{
 		        this.$store.commit('getExtraInfo',d.data)          
-	        })	        
+	        })	
+
+			this.$store.commit('getDetailId',this.$route.params.id)	                   
 
 			this.$nextTick( ()=>{
 				let wrapper = document.getElementById("wrapper")	
