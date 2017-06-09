@@ -45,6 +45,7 @@
 
 <script>
 	import { Actionsheet } from 'mint-ui'
+	import { mapState } from 'vuex'
 	export default{
 		props:["name"],
 		data(){
@@ -83,23 +84,7 @@
 	    		this.$router.push( { name:'Comment',params:{id:this.id} } )
 	    	}
 	    },
-		computed:{
-			nightStyle(){
-				return this.$store.state.nightStyle
-			},
-			title(){
-				return this.$store.state.title
-			},
-			comments(){
-				return this.$store.state.extraInfo.comments
-			},
-			popularity(){
-				return this.$store.state.extraInfo.popularity
-			},
-			id(){
-				return this.$store.state.detailId
-			}
-		}		
+		computed:mapState(['nightStyle','title','comments','popularity','id'])
 	}
 </script>
 

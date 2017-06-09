@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 
 import router from './router'
-import store from './vuex'
+import store from './store'
 
 import 'mint-ui/lib/style.css'
 import { Lazyload } from 'mint-ui'
@@ -14,6 +14,9 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios,axios)
 
+/*import VueResource from 'vue-resource'
+Vue.use(VueResource)*/
+
 /*import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {
   loading: '/static/loading.gif'
@@ -22,7 +25,6 @@ Vue.use(VueLazyload, {
 Vue.config.productionTip = false
 
 // MintUI.Indicator.open()
-
 import './assets/css/app.css'
 
 /* eslint-disable no-new */

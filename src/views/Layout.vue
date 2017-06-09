@@ -1,7 +1,9 @@
 <template>
 	<section>
 		<custom-header :name="name"/>
-		<router-view></router-view>
+		<transition name="slide">
+			<router-view></router-view>
+		</transition>
 		<!-- 侧边栏主题列表 -->
 		<slide-menu></slide-menu>	
 	</section>
@@ -34,5 +36,12 @@
 	@rem:40rem;
 	section{
 		height:100%;
+
+		.slide-enter-active, .slide-leave-active {
+		  transition: all .3s
+		}
+		.slide-enter, .slide-leave-active {
+		  transform: translateX(-100%)
+		}		
 	}	
 </style>
