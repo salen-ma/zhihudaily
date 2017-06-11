@@ -7,8 +7,6 @@ export default new Vuex.Store({
     nightStyle:false,
     popupVisible:false,
     title:'首页',
-    comments:0,
-    popularity:0,
     detailId:0,
     extraInfo:{},
     long_comments:[],

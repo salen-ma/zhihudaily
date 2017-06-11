@@ -27,11 +27,11 @@
 				@click="gotoComment"
 			>
 				<i class="iconfont icon-comment"></i>
-				<span>{{comments}}</span>
+				<span>{{extraInfo.comments}}</span>
 			</span>
 			<span class="like" v-if="name==='Detail'">
 				<i class="iconfont icon-like"></i>
-				<span>{{popularity}}</span>
+				<span>{{extraInfo.popularity}}</span>
 			</span>
 			<Actionsheet  
 				:actions="actions" 
@@ -80,11 +80,11 @@
 	    		this.$router.go(-1)
 	    	},
 	    	gotoComment(){
-	    		this.$store.commit('changeTitle',this.comments+'条点评')
-	    		this.$router.push( { name:'Comment',params:{id:this.id} } )
+	    		this.$store.commit('changeTitle',this.extraInfo.comments+'条点评')
+	    		this.$router.push( { name:'Comment',params:{id:this.detailId} } )
 	    	}
 	    },
-		computed:mapState(['nightStyle','title','comments','popularity','id'])
+		computed:mapState(['nightStyle','title','extraInfo','popularity','detailId'])
 	}
 </script>
 

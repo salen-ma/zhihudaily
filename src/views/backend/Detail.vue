@@ -14,15 +14,14 @@
 		    </div>
 		    <div class="article" :class="{'night-style':nightStyle}" v-html="data.body">
 		    </div>
-		    <router-link 
+		    <div 
 			    class="from" 
-			    v-if="data.section" 
-			    :to="{name:'Section',params:{id:data.section.id}}"
-			    tag="div"
+			    v-if="data.section"
+			    @click="gotoSection(data.section.id,data.section.name)" 
 		    >
 		    	<img :src="data.section.thumbnail" alt="">
 		    	<div class="from-body">本文来自: {{data.section.name}}.合集 <span></span></div>
-		    </router-link>
+		    </div>
 		</div>		
 	</div>
 </template>
@@ -94,6 +93,12 @@
 			nightStyle(){
 				return this.$store.state.nightStyle
 			}
+		},
+		methods:{
+			gotoSection(id,title){
+	    		this.$store.commit('changeTitle',title)
+	    		this.$router.push( { name:'Section',params:{id:id} } )
+	    	}			
 		}			
 	}
 </script>
